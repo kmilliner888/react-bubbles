@@ -10,6 +10,7 @@ const initialColor = {
 
 const ColorList = ({ colors, updateColors }) => {
   console.log("ColorList colors", colors);
+  console.log("ColorList updateColors", updateColors);
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
 
@@ -68,6 +69,7 @@ const ColorList = ({ colors, updateColors }) => {
             />
           </li>
         ))}
+        
       </ul>
       {editing && (
         <form onSubmit={saveEdit}>
