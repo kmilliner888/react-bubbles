@@ -27,20 +27,26 @@ const ColorList = ({ colors, updateColors }) => {
     axiosWithAuth()
     .put(`http://localhost:5000/api/colors/${colorToEdit.id}`, colorToEdit)
       .then(res => {
-        updateColors(res.data)
+        console.log("edit response", res)
+        updateColors([...colors, res.data])
       })
       .catch(error => {
         console.error("error", error)
       })
+    console.log("updated colors", colors);
   };
 
   const deleteColor = color => {
     // make a delete request to delete this color
     axiosWithAuth()
-    .delete(`http://localhost:5000/api/colors/${color.id}`, )
+    .delete(`http://localhost:5000/api/colors/${color.id}`)
       .then(res => {
-        updateColors(res.data);
-        updateColors.history.push("/api/colors");
+        console.log("delete response", res);
+        let newColors = colors.filter( item  => 
+          // console.log("filter colors", colors);
+          item.id !== res.data
+        );
+        updateColors(newColors);
       })
       .catch(error => {
         console.error("error", error)
